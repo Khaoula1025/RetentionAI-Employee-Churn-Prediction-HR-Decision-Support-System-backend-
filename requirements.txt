@@ -39,4 +39,4 @@ pytest
 # Utilities
 pydantic
 PyJWT 
-# pydantic[email]==2.5.3
+pydantic[email]
