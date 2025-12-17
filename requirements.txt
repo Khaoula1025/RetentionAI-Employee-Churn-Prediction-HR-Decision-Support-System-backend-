@@ -40,3 +40,4 @@ pytest
 pydantic
 PyJWT 
 pydantic[email]
+google-generativeai
