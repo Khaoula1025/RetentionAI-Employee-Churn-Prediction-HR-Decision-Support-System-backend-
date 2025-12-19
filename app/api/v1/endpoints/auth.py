@@ -1,11 +1,12 @@
  # /register, /login
 from fastapi import APIRouter, Depends, HTTPException, Response, status
-from app.schemas.auth import UserCreate
+from app.schemas.auth import UserCreate,UserLogin
 from app.models.user import User
 from app.db.session import get_db
 from sqlalchemy.orm import Session
 from app.api.deps import signJwt, get_current_user
 from app.core.security import hash_password, verify_password
+from sqlalchemy import or_
 
 authRouter = APIRouter(prefix="/auth")
 
@@ -26,11 +27,18 @@ async def create_user(user: UserCreate, db: Session = Depends(get_db)):
 
 
 @authRouter.post('/login')
-async def login(response: Response, user: UserCreate, db: Session = Depends(get_db)):
+async def login(response: Response, user: UserLogin, db: Session = Depends(get_db)):
 
-    found = db.query(User).filter(User.email == user.email).first()
+    # Change this line to check both email AND username
+    found = db.query(User).filter(
+        or_(
+            User.email == user.identifier,
+            User.username == user.identifier
+        )
+    ).first()
+    
     if not found or not verify_password(user.password, found.password):
-        raise HTTPException(status_code=401, detail='Invalid username or password')
+        raise HTTPException(status_code=401, detail='Invalid credentials')
     
     token = signJwt(found.id)
     response.set_cookie(

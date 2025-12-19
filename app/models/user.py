@@ -1,5 +1,6 @@
 from app.db.session import Base
 from sqlalchemy import Column, Integer, String, DateTime, func
+from sqlalchemy.orm import  relationship
 
 class User(Base):
     __tablename__ = "users"
@@ -14,3 +15,5 @@ class User(Base):
         server_default=func.now(),
         nullable=False
     )
+
+    predictions = relationship("PredictionHistory", back_populates="user")

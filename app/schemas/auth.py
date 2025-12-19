@@ -9,7 +9,7 @@ class UserCreate(UserBase):
 
 
 class UserLogin(BaseModel):
-    email: EmailStr
+    identifier: str  # Can be either username or email
     password: str
 
 class UserResponse(BaseModel):

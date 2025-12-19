@@ -8,7 +8,7 @@ model=joblib.load('ml/models/probModel.pkl')
 def predict_probability(data):
     data=pd.DataFrame([data])
     result=model.predict_proba(data)
-    return result[1]
+    return result[0][1]
     
 test_data_low_risk = {
     "Age": 35,
@@ -40,4 +40,4 @@ test_data_low_risk = {
     "YearsSinceLastPromotion": 2,
     "YearsWithCurrManager": 6
 }
-#print(predict_proba(test_data_low_risk))
+#print(predict_probability(test_data_low_risk))
