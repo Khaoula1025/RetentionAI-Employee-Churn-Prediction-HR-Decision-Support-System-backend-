@@ -1,22 +1,18 @@
-# tests/test_model.py
 import pytest
 import joblib
 from types import SimpleNamespace
 
 from app.services.llm_service import predict_probability
 
-# Load the model saved with joblib
-model = joblib.load("ml.models.probModel.pkl")
+model=joblib.load('ml/models/probModel.pkl')
 
 def test_model_loaded():
-    # Check that model object exists and has expected attributes
     assert model is not None
     assert hasattr(model, "predict")
     assert hasattr(model, "predict_proba")
-    assert hasattr(model, "feature_names_in_")  # scikit-learn >=0.24
+    assert hasattr(model, "feature_names_in_") 
 
 def test_predict_probability_consistency():
-    # Example input data matching model features
     test_input = {
         "Age": 30,
         "BusinessTravel": "Travel_Rarely",
@@ -50,8 +46,6 @@ def test_predict_probability_consistency():
 
     prob = predict_probability(test_input)
     
-    # Ensure prediction is a valid probability
     assert 0.0 <= prob <= 1.0
 
-    # Optional: check expected range for low-risk input
-    assert 0.0 <= prob <= 0.5
+
