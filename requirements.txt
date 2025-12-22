@@ -17,16 +17,9 @@ pandas
 numpy
 joblib
 
-# MLflow (optional)
-#mlflow==2.10.0
-
 # Visualization (for notebooks)
 seaborn
 matplotlib
-
-# LLM APIs
-# requests==2.31.0
-# httpx==0.26.0
 
 # Environment
 python-dotenv
@@ -35,8 +28,7 @@ dotenv
 
 # Testing
 pytest
-# pytest-asyncio==0.23.4
-# pytest-cov==4.1.0
+
 
 # Utilities
 pydantic

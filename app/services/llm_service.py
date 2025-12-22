@@ -3,7 +3,7 @@ import joblib
 import pandas as pd 
 model=joblib.load('ml/models/probModel.pkl')
 #print(model.classes_)
-#print(model.feature_names_in_)
+print(model.feature_names_in_)
 
 def predict_probability(data):
     data=pd.DataFrame([data])
