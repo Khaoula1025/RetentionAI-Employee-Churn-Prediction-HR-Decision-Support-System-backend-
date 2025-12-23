@@ -6,7 +6,7 @@ from app.db.session import Base
 class PredictionHistory(Base):
     __tablename__ = "predictions_history"
 
-    id = Column(Integer, primary_key=True, index=True)  # auto-increment
+    id = Column(Integer, primary_key=True, index=True)  
 
     user_id = Column(Integer,ForeignKey("users.id", ondelete="CASCADE"),nullable=False
     )
@@ -15,11 +15,11 @@ class PredictionHistory(Base):
         Integer,
         ForeignKey("employees.id"),
         nullable=False,
-        unique=True   # 👈 enforces ONE prediction per employee
+        unique=True   # enforce one prediction par employe
     )
 
     probability = Column(Float, nullable=False)
 
-    # ORM relationships
+    # 
     user = relationship("User", back_populates="predictions")
     employee = relationship("Employee", back_populates="prediction")

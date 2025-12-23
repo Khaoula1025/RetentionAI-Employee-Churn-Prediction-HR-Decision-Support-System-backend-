@@ -29,7 +29,6 @@ async def create_user(user: UserCreate, db: Session = Depends(get_db)):
 @authRouter.post('/login')
 async def login(response: Response, user: UserLogin, db: Session = Depends(get_db)):
 
-    # Change this line to check both email AND username
     found = db.query(User).filter(
         or_(
             User.email == user.identifier,

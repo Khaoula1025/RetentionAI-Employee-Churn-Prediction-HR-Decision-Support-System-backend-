@@ -20,7 +20,6 @@ def make_prediction(
         # Convert Pydantic model to dict
         prediction_data = predict.model_dump()
 
-        # ML / LLM prediction
         try:
             result = predict_probability(prediction_data)
             probability_value = float(result)
@@ -30,10 +29,10 @@ def make_prediction(
                 detail=f"Prediction service failed: {str(e)}"
             )
 
-        # Save employee data
+        # Save employe data
         employee = Employee(**prediction_data)
         db.add(employee)
-        db.flush()  # get employee.id
+        db.flush()  # get employe.id
 
         # Save prediction history
         history = PredictionHistory(

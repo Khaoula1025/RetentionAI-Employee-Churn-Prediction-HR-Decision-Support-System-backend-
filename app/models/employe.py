@@ -5,7 +5,7 @@ from app.db.session import Base
 class Employee(Base):
     __tablename__ = "employees"
 
-    id = Column(Integer, primary_key=True, index=True)  # auto-increment
+    id = Column(Integer, primary_key=True, index=True)  
 
     Age = Column(Integer, nullable=False)
     BusinessTravel = Column(String(50), nullable=False)

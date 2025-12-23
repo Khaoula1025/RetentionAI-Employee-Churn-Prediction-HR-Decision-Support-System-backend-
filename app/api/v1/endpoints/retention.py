@@ -13,10 +13,8 @@ def retention_maker(
     db: Session = Depends(get_db)
 ):
     try:
-        # Convert request data
-        prediction_data = predict.model_dump()
 
-        # Get churn probability
+        prediction_data = predict.model_dump()
         try:
             probability = predict_probability(prediction_data)
             probability_value = float(probability)
@@ -26,7 +24,6 @@ def retention_maker(
                 detail=f"Prediction service failed: {str(e)}"
             )
 
-        # Generate retention analysis (Gemini / LLM)
         try:
             retention = gemini_analyse(probability_value, prediction_data)
         except Exception as e:
